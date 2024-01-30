@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import BooksContext from "../context/bookContext";
 import BookEdit from "./BookEdit";
 
-function BookShow({ book, onDelete, onEdit }) {
-
+function BookShow({ book }) {
+    const{deleteBookById} = useContext(BooksContext);
     const [toggle, setToggle] = useState(false);
 
     const handleClick = () => {
-        onDelete(book.id);
+        deleteBookById(book.id);
     };
 
     const changeToggle = () => {
@@ -17,7 +18,7 @@ function BookShow({ book, onDelete, onEdit }) {
     let content = <h3>{book.title}</h3>
 
     if (toggle) {
-        content = <BookEdit book={book} onEdit={onEdit} closeForm={changeToggle}></BookEdit>
+        content = <BookEdit book={book} closeForm={changeToggle}></BookEdit>
     }
 
 
